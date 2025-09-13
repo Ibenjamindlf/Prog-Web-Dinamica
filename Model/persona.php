@@ -8,15 +8,26 @@ class persona {
     private $fechaNac;
     private $Telefono;
     private $Domicilio;
+    private $mensajeOperacion;
 
     // constructor de la clase
-    public function __construct($NroDni, $Apellido, $Nombre, $fechaNac, $Telefono, $Domicilio) {
-        $this->NroDni = $NroDni;
-        $this->Apellido = $Apellido;
-        $this->Nombre = $Nombre;
-        $this->fechaNac = $fechaNac;
-        $this->Telefono = $Telefono;
-        $this->Domicilio = $Domicilio;
+    public function __construct() {
+        $this->NroDni = "";
+        $this->Apellido = "";
+        $this->Nombre = "";
+        $this->fechaNac = "";
+        $this->Telefono = "";
+        $this->Domicilio = "";
+        $this->mensajeOperacion = "";
+    }
+    // Funcion para setear todos los atributos de la clase
+    public function setear($NroDni, $Apellido, $Nombre, $fechaNac, $Telefono, $Domicilio){
+        $this->setNroDni($NroDni);
+        $this->setApellido($Apellido);
+        $this->setNombre($Nombre);
+        $this->setFechaNac($fechaNac);
+        $this->setTelefono($Telefono);
+        $this->setDomicilio($Domicilio);
     }
 
     // getters
@@ -38,6 +49,9 @@ class persona {
     public function getDomicilio() {
         return $this->Domicilio;
     }
+    public function getMensajeOperacion(){
+        return $this->mensajeOperacion ;
+    }
 
     // setters
     public function setNroDni($NroDni) {
@@ -58,6 +72,9 @@ class persona {
     public function setDomicilio($Domicilio) {
         $this->Domicilio = $Domicilio;
     }
+    public function setMensajeOperacion($mensajeOperacion){
+        $this->mensajeOperacion = $mensajeOperacion;
+    }
     // Método para representar el objeto como una cadena
     public function __toString() {
         // Guardamos todos los atributos en variables locales
@@ -72,62 +89,63 @@ class persona {
             "DNI: $NroDni, Apellido: $Apellido, Nombre: $Nombre, Fecha de Nacimiento: $fechaNac, Teléfono: $Telefono, Domicilio: $Domicilio"
         );
     }
-    // 5 funciones (buscar,listar,insertar,modificar,eliminar) -> phpMyAdmin
+    // 5 funciones (cargar,listar,insertar,modificar,eliminar) -> phpMyAdmin
 
     // Funcion para buscar una persona por su nroDNI en la base de datos
     // Return true si se encontró a la persona, false si no
-    public static function buscar($numeroDoc){
-        $dataBase = new DataBase();
-        $consulta = "SELECT * FROM persona 
-                    WHERE NroDni = '" . $numeroDoc . "'";
-        $personaEncontrada = null;
-        if ($dataBase->iniciar()) {
-            if ($dataBase->ejecutar($consulta)) {
-                // Mientras $fila tenga valor el if se ejecuta
-                if ($fila = $dataBase->registro()) {
-                    $personaEncontrada = new Persona(
-                            $fila['NroDni'],
-                            $fila['Apellido'],
-                            $fila['Nombre'],
-                            $fila['fechaNac'],
-                            $fila['telefono'],
-                            $fila['Domicilio']
-                        );
-                }
-                } else {
-                    throw new Exception($dataBase->getError());
-                }
-            } else {
-                throw new Exception($dataBase->getError());
+    public function cargar(){
+    $resp = false;
+    $dataBase = new DataBase();
+    $sql = "SELECT * FROM persona WHERE NroDni = '" . $this->getNroDni() . "'";
+    if ($dataBase->iniciar()) {
+        $res = $dataBase->ejecutar($sql);
+        if ($res > -1) {
+            if ($res > 0) {
+                $row = $dataBase->registro();
+                $this->setear(
+                    $row['NroDni'],
+                    $row['Apellido'],
+                    $row['Nombre'],
+                    $row['fechaNac'],
+                    $row['telefono'],
+                    $row['Domicilio']
+                );
+                $resp = true;
             }
-        return $personaEncontrada;
+        }
+    } else {
+        $this->setMensajeOperacion("Persona->cargar" . $dataBase->getError());
     }
+    return $resp;
+    }
+
     // Funcion para insertar una nueva persona
     // Return true si se pudo insertar, false si no
     public function insertar() {
+        $resp = false;
         $dataBase = new DataBase();
-        $respuesta = false;
-        $consulta = "INSERT INTO persona (NroDni, Apellido, Nombre, fechaNac, Telefono, Domicilio)
+        $sql = "INSERT INTO persona (NroDni, Apellido, Nombre, fechaNac, Telefono, Domicilio)
                     VALUES ('" . $this->getNroDni() . "', '" . $this->getApellido() . "', '" .
                                 $this->getNombre() . "', '" . $this->getFechaNac() . "', '" .
                                 $this->getTelefono() . "', '" . $this->getDomicilio() . "')";
         if ($dataBase->iniciar()) {
-            if ($dataBase->ejecutar($consulta)) {
-                $respuesta = true;
+            if ($dataBase->ejecutar($sql)) {  // devuelve true si insertó bien
+                $resp = true;
             } else {
-                throw new Exception($dataBase->getError());
+                $this->setMensajeOperacion("Persona->insertar: " . $dataBase->getError());
             }
         } else {
-            throw new Exception($dataBase->getError());
+            $this->setMensajeOperacion("Persona->insertar: " . $dataBase->getError());
         }
-        return $respuesta;
+    return $resp;
     }
+
     // Funcion para modificar una persona
     // Return true si se pudo modificar, false si no
     public function modificar() {
-    $respuesta = false;
+    $resp = false;
     $dataBase = new DataBase();
-    $consulta = "UPDATE persona SET NroDni = '" . $this->getNroDni() . "',
+    $sql = "UPDATE persona SET NroDni = '" . $this->getNroDni() . "',
                                     apellido = '" . $this->getApellido() . "',
                                     Nombre = '" . $this->getNombre() . "',
                                     fechaNac = '" . $this->getFechaNac() . "',
@@ -135,64 +153,60 @@ class persona {
                                     Domicilio = '" . $this->getDomicilio() . "'
                 WHERE NroDni = '" . $this->getNroDni() . "'";
     if ($dataBase->iniciar()) {
-        if ($dataBase->ejecutar($consulta)) {
-            $respuesta = true;
+        if ($dataBase->ejecutar($sql)) {
+            $resp = true;
         } else {
-            throw new Exception($dataBase->getError());
+            $this->setMensajeOperacion("Persona->modificar: " . $dataBase->getError());
         }
     } else {
-        throw new Exception($dataBase->getError());
+        $this->setMensajeOperacion("Persona->modificar: " . $dataBase->getError());
     }
-    return $respuesta;
+    return $resp;
     }
     // Funcion para eliminar una persona
     // Return true si se pudo eliminar, false si no
     public function eliminar() {
-    $respuesta = false;
+    $resp = false;
     $dataBase = new DataBase();
+    $sql = "DELETE FROM persona WHERE NroDni = '" . $this->getNroDni() . "'";
     if ($dataBase->iniciar()) {
-        $consulta = "DELETE FROM persona 
-                    WHERE NroDni = '" . $this->getNroDni() . "'";
-        if ($dataBase->ejecutar($consulta)) {
-            $respuesta = true;
+        if ($dataBase->ejecutar($sql)) {
+            $resp = true;
         } else {
-            throw new Exception($dataBase->getError());
+            $this->setMensajeOperacion("Persona->eliminar: " . $dataBase->getError());
         }
     } else {
-        throw new Exception($dataBase->getError());
+        $this->setMensajeOperacion("Persona->eliminar: " . $dataBase->getError());
     }
-    return $respuesta;
+    return $resp;
     }
     // Funcion para listar todas las personas
     // Return un array con todas las personas o null si no hay
-    public static function listar($condicion = "") {
-        $arregloPersonas = null;
+    public static function seleccionar($condicion = "") {
+        $arregloPersonas = array();
         $dataBase = new DataBase();
-        $consulta = "SELECT * FROM persona ";
+        $sql = "SELECT * FROM persona ";
         if ($condicion != "") {
-            $consulta = $consulta . ' WHERE ' . $condicion;
+            $sql .= 'WHERE ' . $condicion;
         }
-        $consulta .= " ORDER BY Apellido";
-        if ($dataBase->iniciar()) {
-            if ($dataBase->ejecutar($consulta)) {
-                $arregloPersonas = array();
-                // Mientras $fila tenga valor el while se ejecuta
-                while ($fila = $dataBase->registro()) {
-                    $personaEncontrada = new Persona(
-                            $fila['NroDni'],
-                            $fila['Apellido'],
-                            $fila['Nombre'],
-                            $fila['fechaNac'],
-                            $fila['telefono'],
-                            $fila['Domicilio']
-                        );
-                    array_push($arregloPersonas, $personaEncontrada);
+        $res = $dataBase->ejecutar($sql);
+        if ($res > -1) {
+            if ($res > 0) {
+                while ($row = $dataBase->registro()) {
+                    $persona = new persona();
+                    $persona->setear(
+                        $row['NroDni'],
+                        $row['Apellido'],
+                        $row['Nombre'],
+                        $row['fechaNac'],
+                        $row['Telefono'],
+                        $row['Domicilio']
+                    );
+                    array_push($arregloPersonas, $persona);
                 }
-            } else {
-                throw new Exception($dataBase->getError());
             }
         } else {
-            throw new Exception($dataBase->getError());
+            $this->setMensajeOperacion("Persona->listar: " . $dataBase->getError());
         }
         return $arregloPersonas;
     }

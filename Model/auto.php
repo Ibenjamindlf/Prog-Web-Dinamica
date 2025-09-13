@@ -6,15 +6,23 @@ class auto {
     private $Marca;
     private $Modelo;
     private $NroDniPropietario;
+    private $mensajeOperacion;
 
     // constructor de la clase
-    public function __construct($Patente, $Marca, $Modelo, $NroDniPropietario) {
-        $this->Patente = $Patente;
-        $this->Marca = $Marca;
-        $this->Modelo = $Modelo;
-        $this->NroDniPropietario = $NroDniPropietario;
+    public function __construct() {
+        $this->Patente = "";
+        $this->Marca = "";
+        $this->Modelo = "";
+        $this->NroDniPropietario = "";
+        $this->mensajeOperacion = "";
     }
-
+    // Funcion para setear todos los atributos de la clase
+    public function setear($Patente, $Marca, $Modelo, $NroDniPropietario){
+        $this->setPatente($Patente);
+        $this->setMarca($Marca);
+        $this->setModelo($Modelo);
+        $this->setNroDniPropietario($NroDniPropietario);
+    }
     // getters
     public function getPatente() {
         return $this->Patente;
@@ -27,6 +35,9 @@ class auto {
     }
     public function getNroDniPropietario() {
         return $this->NroDniPropietario;
+    }
+    public function getMensajeOperacion(){
+        return $this->mensajeOperacion ;
     }
 
     // setters
@@ -41,6 +52,9 @@ class auto {
     }
     public function setNroDniPropietario($NroDniPropietario) {
         $this->NroDniPropietario = $NroDniPropietario;
+    }
+    public function setMensajeOperacion($mensajeOperacion){
+        $this->mensajeOperacion = $mensajeOperacion;
     }
     // Método para representar el objeto como una cadena
     public function __toString() {
@@ -60,89 +74,82 @@ class auto {
     // 5 funciones (buscar,listar,insertar,modificar,eliminar) -> phpMyAdmin
     // Funcion para buscar un auto por su patente en la base de datos
     // Return el objeto auto si se encontró, null si no
-    public static function buscar($patente){
+    public function cargar(){
+        $resp = false;
         $dataBase = new DataBase();
-        $consulta = "SELECT * FROM auto 
-                    WHERE Patente = '" . $patente . "'";
-        $autoEncontrado = null;
+        $sql = "SELECT * FROM auto WHERE Patente = ".$this->getPatente(); 
         if ($dataBase->iniciar()) {
-            if ($dataBase->ejecutar($consulta)) {
-                // Mientras $fila tenga valor el if se ejecuta
-                if ($fila = $dataBase->registro()) {
-                    $autoEncontrado = new auto(
-                            $fila['Patente'],
-                            $fila['Marca'],
-                            $fila['Modelo'],
-                            $fila['DniDuenio']
-                        );
+            $res = $dataBase->ejecutar($sql);
+            if ($res>-1) {
+                if ($res>0) {
+                    $row = $dataBase->registro();
+                    $this->setear($row['Patente'], $row['Marca'], $row['Modelo'], $row['DniDuenio']);
+                    $resp = true;
                 }
-                } else {
-                    throw new Exception($dataBase->getError());
-                }
+            }
         } else {
-            throw new Exception("No se pudo iniciar la base de datos");
+            $this->setMensajeOperacion("auto->cargar: " . $dataBase->getError());
         }
-        return $autoEncontrado;
+        return $resp;
     }
     // Funcion para insertar un nuevo auto
     // Return true si se pudo insertar, false si no
     public function insertar(){
+        $resp = false;
         $dataBase = new DataBase();
-        $inserto = false;
-        if ($dataBase->iniciar()) {
-            $consulta = "INSERT INTO auto(Patente, Marca, Modelo, DniDuenio) 
+        $sql = "INSERT INTO auto(Patente, Marca, Modelo, DniDuenio) 
                         VALUES ('" . $this->getPatente() . "',
                                 '" . $this->getMarca() . "',
                                 '" . $this->getModelo() . "',
                                 '" . $this->getNroDniPropietario() . "')";
-            if ($dataBase->ejecutar($consulta)) {
-                $inserto = true;
+        if ($dataBase->iniciar()) {
+            if ($dataBase->ejecutar($sql)) {
+                $resp = true;
             } else {
-                throw new Exception($dataBase->getError());
+                $this->setMensajeOperacion("auto->insertar: " . $dataBase->getError());
             }
         } else {
-            throw new Exception("No se pudo iniciar la base de datos");
+            $this->setMensajeOperacion("auto->insertar: " . $dataBase->getError());
         }
-        return $inserto;
+        return $resp;
     }
     // Funcion para modificar un auto
     // Return true si se pudo modificar, false si no
     public function modificar(){
+        $resp = false;
         $dataBase = new DataBase();
-        $modifico = false;
-        if ($dataBase->iniciar()) {
-            $consulta = "UPDATE auto 
+        $sql = "UPDATE auto 
                         SET Marca = '" . $this->getMarca() . "',
                             Modelo = '" . $this->getModelo() . "',
                             DniDuenio = '" . $this->getNroDniPropietario() . "'
                         WHERE Patente = '" . $this->getPatente() . "'";
-            if ($dataBase->ejecutar($consulta)) {
-                $modifico = true;
+        if ($dataBase->iniciar()) {
+            if ($dataBase->ejecutar($sql)) {
+                $resp = true;
             } else {
-                throw new Exception($dataBase->getError());
+                $this->setMensajeOperacion("auto->modificar: " . $dataBase->getError());
             }
         } else {
-            throw new Exception("No se pudo iniciar la base de datos");
+            $this->setMensajeOperacion("auto->modificar: " . $dataBase->getError());
         }
-        return $modifico;
+        return $resp;
     }
     // Funcion para eliminar un auto
     // Return true si se pudo eliminar, false si no
     public function eliminar(){
+        $resp = false;
         $dataBase = new DataBase();
-        $elimino = false;
+        $sql = "DELETE FROM auto WHERE Patente = '" . $this->getPatente() . "'";
         if ($dataBase->iniciar()) {
-            $consulta = "DELETE FROM auto 
-                        WHERE Patente = '" . $this->getPatente() . "'";
-            if ($dataBase->ejecutar($consulta)) {
-                $elimino = true;
+            if ($dataBase->ejecutar($sql)) {
+                $resp = true;
             } else {
-                throw new Exception($dataBase->getError());
+                $this->setMensajeOperacion("auto->eliminar: " . $dataBase->getError());
             }
         } else {
-            throw new Exception("No se pudo iniciar la base de datos");
+            $this->setMensajeOperacion("auto->eliminar: " . $dataBase->getError());
         }
-        return $elimino;
+        return $resp;
     }
     // Funcion para listar todos los autos
     // Return un array con todos los autos o null si no hay

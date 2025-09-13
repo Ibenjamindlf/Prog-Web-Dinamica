@@ -41,8 +41,9 @@ class abmPersona {
     // Corrobora que dentro del arreglo asociativo estan seteados los campos claves
     private function seteadosCamposClaves($param){
         $resp = false;
-        if (isset($param['NroDni']))
+        if (isset($param['NroDni'])){
             $resp = true;
+        }
         return $resp;
     }
 

@@ -164,7 +164,7 @@ class auto {
         if ($dataBase->iniciar()) {
             if ($dataBase->ejecutar($consulta)) {
                 while ($fila = $dataBase->registro()) {
-                    $autoEncontrado = new auto(
+                    $autoEncontrado = new Auto(
                             $fila['Patente'],
                             $fila['Marca'],
                             $fila['Modelo'],

@@ -22,9 +22,9 @@ include_once '../../../configuracion.php';
         <div class="collapse navbar-collapse" id="navbarColor01">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item"><a class="nav-link" href="<?php echo $BASE_URL; ?>Project/view/home/index.php">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="<?php echo $BASE_URL; ?>Project/View/TP1/index.php">TP 1</a></li>
-            <li class="nav-item"><a class="nav-link" href="<?php echo $BASE_URL; ?>Project/View/TP2/index.php">TP 2</a></li>
-            <li class="nav-item"><a class="nav-link" href="<?php echo $BASE_URL; ?>Project/View/TP3/index.php">TP 3</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?php echo $BASE_URL; ?>Project/View/T1/index.php">TP 1</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?php echo $BASE_URL; ?>Project/View/T2/index.php">TP 2</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?php echo $BASE_URL; ?>Project/View/T3/index.php">TP 3</a></li>
           </ul>
         </div>
       </div>

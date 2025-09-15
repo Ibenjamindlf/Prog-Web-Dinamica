@@ -25,9 +25,9 @@
     <section id="proyectos-destacados" class="text-center my-5">
         <h2>Proyectos destacados</h2>
         <div class="mt-4">
-            <a href="./Vista/TP1/8/Inicio.php" class="btn btn-primary btn-lg shadow">Ejercicio 8 T.P N°1</a>
-            <a href="./Vista/TP2/4/inicio.php" class="btn btn-primary btn-lg shadow">Ejercicio 4 T.P N°2</a>
-            <a href="./Vista/TP3/3Benja/inicio.php" class="btn btn-primary btn-lg shadow">Ejercicio 3 T.P N°3</a>
+            <a href="<?php echo $BASE_URL; ?>Project/view/T1/E8/inicio.php" class="btn btn-primary btn-lg shadow">Ejercicio 8 T.P N°1</a>
+            <a href="<?php echo $BASE_URL; ?>Project/view/T2/E4/inicio.php" class="btn btn-primary btn-lg shadow">Ejercicio 4 T.P N°2</a>
+            <a href="<?php echo $BASE_URL; ?>Project/view/T3/E8/inicio.php" class="btn btn-primary btn-lg shadow">Ejercicio 3 T.P N°3</a>
         </div>
     </section>
 
@@ -35,9 +35,9 @@
     <section id="resolucion-trabajos" class="text-center my-5">
         <h2>Resolución de trabajos prácticos</h2>
         <div class="mt-4">
-            <a href="./Vista/TP1/index.php" class="btn btn-primary btn-lg shadow">Trabajo Práctico N°1</a>
-            <a href="./Vista/TP2/index.php" class="btn btn-primary btn-lg shadow">Trabajo Práctico N°2</a>
-            <a href="./Vista/TP3/index.php" class="btn btn-primary btn-lg shadow">Trabajo Práctico N°3</a>
+            <a href="<?php echo $BASE_URL; ?>Project/view/T1/index.php" class="btn btn-primary btn-lg shadow">Trabajo Práctico N°1</a>
+            <a href="<?php echo $BASE_URL; ?>Project/view/T2/index.php" class="btn btn-primary btn-lg shadow">Trabajo Práctico N°2</a>
+            <a href="<?php echo $BASE_URL; ?>Project/view/T3/index.php" class="btn btn-primary btn-lg shadow">Trabajo Práctico N°3</a>
         </div>
     </section>
 

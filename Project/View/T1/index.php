@@ -1,4 +1,4 @@
-<?php 
+<?php  
   $titulo = "Inicio - Trabajo N°1"; 
   include_once $_SERVER['DOCUMENT_ROOT'] . '/PWD_ibenjamindlf/Project/View/components/header.php'; 
 ?>
@@ -16,16 +16,16 @@
     <h2 class="fw-bold mb-4">Ejercicios</h2>
     <div class="row g-3">
       <div class="col-md-6">
-        <a class="btn btn-primary btn-lg w-100 shadow" href="1/Ejercicio1.php">Ejercicio 1</a>
-        <a class="btn btn-primary btn-lg w-100 shadow mt-3" href="2/Ejercicio2.php">Ejercicio 2</a>
-        <a class="btn btn-primary btn-lg w-100 shadow mt-3" href="3/Ejercicio3.php">Ejercicio 3</a>
-        <a class="btn btn-primary btn-lg w-100 shadow mt-3" href="4/Ejercicio4.php">Ejercicio 4</a>
+        <a class="btn btn-primary btn-lg w-100 shadow" href="<?php echo $BASE_URL; ?>Project/View/T1/inicio.php">Ejercicio 1</a>
+        <a class="btn btn-primary btn-lg w-100 shadow mt-3" href="<?php echo $BASE_URL; ?>Project/View/assets/style/styleCarrusel.css">Ejercicio 2</a>
+        <a class="btn btn-primary btn-lg w-100 shadow mt-3" href="<?php echo $BASE_URL; ?>Project/View/assets/style/styleCarrusel.css">Ejercicio 3</a>
+        <a class="btn btn-primary btn-lg w-100 shadow mt-3" href="<?php echo $BASE_URL; ?>Project/View/assets/style/styleCarrusel.css">Ejercicio 4</a>
       </div>
       <div class="col-md-6">
-        <a class="btn btn-primary btn-lg w-100 shadow" href="5/Ejercicio5.php">Ejercicio 5</a>
-        <a class="btn btn-primary btn-lg w-100 shadow mt-3" href="6/Ejercicio6.php">Ejercicio 6</a>
-        <a class="btn btn-primary btn-lg w-100 shadow mt-3" href="7/Ejercicio7.php">Ejercicio 7</a>
-        <a class="btn btn-primary btn-lg w-100 shadow mt-3" href="8/Inicio.php">Ejercicio 8</a>
+        <a class="btn btn-primary btn-lg w-100 shadow" href="<?php echo $BASE_URL; ?>Project/View/assets/style/styleCarrusel.css">Ejercicio 5</a>
+        <a class="btn btn-primary btn-lg w-100 shadow mt-3" href="<?php echo $BASE_URL; ?>Project/View/assets/style/styleCarrusel.css">Ejercicio 6</a>
+        <a class="btn btn-primary btn-lg w-100 shadow mt-3" href="<?php echo $BASE_URL; ?>Project/View/assets/style/styleCarrusel.css">Ejercicio 7</a>
+        <a class="btn btn-primary btn-lg w-100 shadow mt-3" href="<?php echo $BASE_URL; ?>Project/View/assets/style/styleCarrusel.css">Ejercicio 8</a>
       </div>
     </div>
   </main>

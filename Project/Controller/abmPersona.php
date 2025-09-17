@@ -18,7 +18,7 @@ class AbmPersona {
             if  (isset($param['Domicilio']))
                 $where .= " and Domicilio = '".$param['Domicilio']."'";
         }
-        $arreglo = Persona::seleccionar($where);
+        $arreglo = Persona::listar($where);
         return $arreglo;
     }
     // Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto

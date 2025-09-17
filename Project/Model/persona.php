@@ -1,4 +1,5 @@
 <?php 
+include_once $_SERVER['DOCUMENT_ROOT'] . '/PWD_ibenjamindlf/project/model/conector/dataBase.php';
 class persona {
     // Atributos de la clase
     // Por cada columna de la tabla en la base de datos
@@ -182,7 +183,7 @@ class persona {
     }
     // Funcion para listar todas las personas
     // Return un array con todas las personas o null si no hay
-    public static function seleccionar($condicion = "") {
+    public static function listar($condicion = "") {
         $arregloPersonas = array();
         $dataBase = new DataBase();
         $sql = "SELECT * FROM persona ";

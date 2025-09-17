@@ -1,7 +1,7 @@
 <?php
-// /////////////////////////////
-// CONFIGURACIÓN DEL PROYECTO //
-// /////////////////////////////
+// ==============================
+// ==CONFIGURACIÓN DEL PROYECTO==
+// ==============================
 
 // Nombre de la carpeta del proyecto dentro de htdocs
 $PROYECTO = 'PWD_ibenjamindlf';

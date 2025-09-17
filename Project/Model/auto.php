@@ -1,4 +1,5 @@
 <?php 
+include_once $_SERVER['DOCUMENT_ROOT'] . '/PWD_ibenjamindlf/project/model/conector/dataBase.php';
 class auto {
     // Atributos de la clase
     // Por cada columna de la tabla en la base de datos
@@ -15,13 +16,6 @@ class auto {
         $this->Modelo = "";
         $this->NroDniPropietario = "";
         $this->mensajeOperacion = "";
-    }
-    // Funcion para setear todos los atributos de la clase
-    public function setear($Patente, $Marca, $Modelo, $NroDniPropietario){
-        $this->setPatente($Patente);
-        $this->setMarca($Marca);
-        $this->setModelo($Modelo);
-        $this->setNroDniPropietario($NroDniPropietario);
     }
     // getters
     public function getPatente() {
@@ -55,6 +49,13 @@ class auto {
     }
     public function setMensajeOperacion($mensajeOperacion){
         $this->mensajeOperacion = $mensajeOperacion;
+    }
+    // Funcion para setear todos los atributos de la clase
+    public function setear($Patente, $Marca, $Modelo, $NroDniPropietario){
+        $this->setPatente($Patente);
+        $this->setMarca($Marca);
+        $this->setModelo($Modelo);
+        $this->setNroDniPropietario($NroDniPropietario);
     }
     // Método para representar el objeto como una cadena
     public function __toString() {
@@ -153,32 +154,31 @@ class auto {
     }
     // Funcion para listar todos los autos
     // Return un array con todos los autos o null si no hay
-    public static function listar($condicion = ""){
-        $dataBase = new DataBase();
-        $listaAutos = null;
-        $consulta = "SELECT * FROM auto ";
+        public static function listar($condicion = "")
+    {
+        $arreglo = array();
+        $base = new dataBase();
+        $sql = "SELECT * FROM Auto ";
+
         if ($condicion != "") {
-            $consulta = $consulta . ' WHERE ' . $condicion;
+            $sql .= 'WHERE ' . $condicion;
         }
-        $consulta = $consulta . " ORDER BY Patente ";
-        if ($dataBase->iniciar()) {
-            if ($dataBase->ejecutar($consulta)) {
-                while ($fila = $dataBase->registro()) {
-                    $autoEncontrado = new Auto(
-                            $fila['Patente'],
-                            $fila['Marca'],
-                            $fila['Modelo'],
-                            $fila['DniDuenio']
-                        );
-                    $listaAutos[] = $autoEncontrado;
+
+        $res = $base->Ejecutar($sql);
+
+        if ($res > -1) {
+            if ($res > 0) {
+                while ($row = $base->Registro()) {
+                    $obj = new auto();
+                    $obj->setear($row['Patente'], $row['Marca'], $row['Modelo'], $row['DniDuenio']);
+                    array_push($arreglo, $obj);
                 }
-            } else {
-                throw new Exception($dataBase->getError());
             }
         } else {
-            throw new Exception("No se pudo iniciar la base de datos");
+            $this->setMensajeOperacion("usuarios->seleccionar: " . $base->getError());
         }
-        return $listaAutos;
+
+        return $arreglo;
     }
 }
 ?>

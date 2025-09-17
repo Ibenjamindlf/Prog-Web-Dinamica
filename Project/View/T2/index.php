@@ -1,21 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TP 2 - PWD 2025</title>
-  <link rel="stylesheet" href="../Frameworks/bootstrap.min.css">
-  <!-- <link rel="stylesheet" href="../../resources/css/styles.css"> -->
-</head>
-<body class="d-flex flex-column min-vh-100">
-
-  
-      <!-- Navbar -->
-  <?php
-  include_once('../structure/header.php');
-  ?>
-
-  <!-- Header -->
+<?php  
+  $titulo = "Inicio - Trabajo N°1"; 
+  include_once $_SERVER['DOCUMENT_ROOT'] . '/PWD_ibenjamindlf/Project/View/components/header.php'; 
+?>
+  <!-- Header propio -->
   <header class="container text-center py-5">
     <h1 class="display-4 fw-bold text-primary">Trabajo Práctico N°2</h1>
     <p class="lead bg-info text-dark d-inline-block px-4 py-2 rounded-pill mt-3 shadow-sm">

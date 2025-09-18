@@ -22,6 +22,14 @@ include_once $GLOBALS['ROOT'] . 'Project/View/components/header.php';
     </div>
 </header>
 <div class="container mt-5 text-center">
+    <?php if ($patente === null) { ?>
+        <div class="container card text-bg-danger " style="max-width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Error</h5>
+                <p class="card-text">No se enviaron datos</p>
+            </div>
+        </div>
+    <?php } else { ?>
 <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -60,4 +68,8 @@ include_once $GLOBALS['ROOT'] . 'Project/View/components/header.php';
                     <?php } ?>
                 </tbody>
             </table>
+    <?php } ?>
+    <div class="mt-5">
+        <a href="../admin/buscarAuto.php" class="btn btn-outline-primary">Volver</a>
+    </div>
 </div>

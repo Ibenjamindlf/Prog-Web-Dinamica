@@ -13,12 +13,12 @@ include_once $GLOBALS['ROOT'] . 'Project/View/components/header.php';
 <link rel="stylesheet" href="../assets/style/styleValidaciones.css">
 <main class="container mt-5 d-flex flex-column min-vh-100">
         <section class="card shadow p-4">
-            <form class="needs-validation" novalidate action="ppp.php" id="loginForm" method="post" enctype="multipart/form-data">
+            <form class="needs-validation" novalidate action="../acciones/accionBuscarAuto.php" id="loginForm" method="post" enctype="multipart/form-data">
                             <h2 class="mb-4 text-primary">Busqueda de auto</h2>
 
                             <div class="row mb-3">
                                 <div class="col-md-12">
-                                    <label for="validacionTitulo" class="form-label">Patente (Formato: AAA123)</label>
+                                    <label for="validacionTitulo" class="form-label">Patente (Formato: AAA-123)</label>
                                     <input type="text" id="validacionPatente" name="patente" class="form-control" required>
                                     <div class="invalid-feedback" id="patenteInvalid"></div>
                                     <div class="valid-feedback" id="patenteValid"></div>

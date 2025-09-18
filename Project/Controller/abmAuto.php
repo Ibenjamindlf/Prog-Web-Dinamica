@@ -3,9 +3,10 @@
 // Atributos de auto: Patente,marca,modelo,DniDuenio (4)
 class AbmAuto {
     // Permite buscar un objeto
-    public function buscar ($param){
+    public function buscar($param)
+    {
         $where = " true ";
-        if ($param != null){
+        if ($param != null) {
             if (isset($param['Patente']))
                 $where .= " and Patente = '".$param['Patente']."'";
             if (isset($param['Marca']))
@@ -16,6 +17,10 @@ class AbmAuto {
                 $where .= " and DniDuenio = '".$param['DniDuenio']."'";
         }
         $arreglo = Auto::listar($where);
+        // ✅ Si viene vacío, devuelvo null
+        if (empty($arreglo)) {
+            $arreglo = null;
+        }
         return $arreglo;
     }
     // Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto

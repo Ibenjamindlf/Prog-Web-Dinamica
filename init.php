@@ -6,7 +6,7 @@ include_once __DIR__ . "/configuracion.php";
 // =INCLUDES GENERALES=
 // ====================
 
-// Funciones globales
+// Funciones globales (data_submitted, verEstructura, etc.)
 include_once $ROOT . "project/utils/funciones.php";
 
 // Modelos

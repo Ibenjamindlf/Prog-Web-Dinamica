@@ -4,10 +4,9 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/PWD_ibenjamindlf/init.php';
 $titulo = 'Busqueda de autos asociados';
 include_once $GLOBALS['ROOT'] . 'Project/View/components/header.php';
 ?>
-<link rel="stylesheet" href="../assets/style/styleValidaciones.css">
-<main class="container mt-5 d-flex flex-column min-vh-100">
+<main class="container mt-5 d-flex flex-column">
         <section class="card shadow p-4">
-            <form class="needs-validation" novalidate action="../acciones/accionBuscarAuto.php" id="loginForm" method="post" enctype="multipart/form-data">
+            <form class="needs-validation" novalidate action="../acciones/accionAutosPersona.php" id="loginForm" method="get" enctype="multipart/form-data">
                             <h2 class="mb-4 text-primary">Busqueda de auto asociados</h2>
                             <div class="row mb-3">
                                 <div class="col-md-12">
@@ -25,3 +24,7 @@ include_once $GLOBALS['ROOT'] . 'Project/View/components/header.php';
     <!-- Validador para formularios -->
     <script src="../assets/function/validadorAutosPersona.js"></script>
 </main>
+
+<?php 
+include_once $GLOBALS['ROOT'] . 'Project/View/components/footer.php';
+?>

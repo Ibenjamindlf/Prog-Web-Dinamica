@@ -5,18 +5,18 @@ class AbmPersona {
     public function buscar($param){
         $where = " true ";
         if ($param != null){
-            if  (isset($param['NroDni']))
-                $where .= " and NroDni = '".$param['NroDni']."'";
-            if  (isset($param['Apellido']))
-                $where .= " and Apellido = '".$param['Apellido']."'";
-            if  (isset($param['Nombre']))
-                $where .= " and Nombre = '".$param['Nombre']."'";
-            if  (isset($param['fechaNac']))
-                $where .= " and fechaNac = '".$param['fechaNac']."'";
-            if  (isset($param['Telefono']))
-                $where .= " and Telefono = '".$param['Telefono']."'";
-            if  (isset($param['Domicilio']))
-                $where .= " and Domicilio = '".$param['Domicilio']."'";
+            if  (isset($param['nroDni']))
+                $where .= " and nroDni = '".$param['nroDni']."'";
+            if  (isset($param['apellido']))
+                $where .= " and apellido = '".$param['apellido']."'";
+            if  (isset($param['nombre']))
+                $where .= " and nombre = '".$param['nombre']."'";
+            if  (isset($param['fechaNacimiento']))
+                $where .= " and fechaNacimiento = '".$param['fechaNacimiento']."'";
+            if  (isset($param['numTelefono']))
+                $where .= " and numTelefono = '".$param['numTelefono']."'";
+            if  (isset($param['domicilio']))
+                $where .= " and domicilio = '".$param['domicilio']."'";
         }
         $arreglo = Persona::listar($where);
         return $arreglo;
@@ -24,15 +24,15 @@ class AbmPersona {
     // Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
     private function cargarObjeto ($param){
         $objPersona = null;
-        if ( array_key_exists('NroDni',$param) and array_key_exists('Apellido',$param) and array_key_exists('Nombre',$param) and array_key_exists('fechaNac',$param) and array_key_exists('Telefono',$param) and array_key_exists('Domicilio',$param)){
+        if ( array_key_exists('nroDni',$param) and array_key_exists('apellido',$param) and array_key_exists('nombre',$param) and array_key_exists('fechaNacimiento',$param) and array_key_exists('numTelefono',$param) and array_key_exists('domicilio',$param)){
             $objPersona = new Persona();
             $objPersona->setear(
-                $param['NroDni'], 
-                $param['Apellido'], 
-                $param['Nombre'], 
-                $param['fechaNac'], 
-                $param['Telefono'], 
-                $param['Domicilio']
+                $param['nroDni'], 
+                $param['apellido'], 
+                $param['nombre'], 
+                $param['fechaNacimiento'], 
+                $param['numTelefono'], 
+                $param['domicilio']
             );
         }
         return $objPersona;
@@ -90,11 +90,11 @@ class AbmPersona {
     // permite agregar un objeto
     public function alta($param){
         $resp = false;
-        $busquedaPersona = ["NroDni" => $param["NroDni"]];
+        $busquedaPersona = ["nroDni" => $param["nroDni"]];
         $existePersona = $this->buscar($busquedaPersona);
         if ($existePersona == null) {
             $objPersona = $this->cargarObjeto($param);
-            if ($objPersona->insertar()){
+            if ($objPersona !== null && $objPersona->insertar()){
                 $resp = true;
             }
         }

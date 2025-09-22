@@ -84,6 +84,7 @@ include_once $GLOBALS['ROOT'] . 'Project/View/components/header.php';
     <div class="row justify-content-center">
         <div class="col-md-6">
             <a href="../admin/nuevaPersona.php" class="btn btn-outline-primary">Volver</a>
+            <a href="../admin/listaPersonas.php" class="btn btn-outline-primary">Ver listado de personas</a>
         </div>
     </div>
 </div>

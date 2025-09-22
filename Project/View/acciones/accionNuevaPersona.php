@@ -37,14 +37,16 @@ include_once $GLOBALS['ROOT'] . 'Project/View/components/header.php';
     $validador->validacionDomicilio($domicilio);
 
     $datosEnArray = [$nombre,$apellido,$nroDni,$fechaNacimiento,$nroTelefono,$domicilio];
-
-    if ($validador->hayErrores()){ 
 ?>
-<div class="container">
-    <div class="row">
-        <div class="text-center col-md-12 card bg-danger shadow">
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+
+<?php if ($validador->hayErrores()){ ?>
+    <div class="card-body bg-danger text-white text-center rounded-3">
             <h3>error</h3>
-            <p>
                 <?php 
                 $errores = $validador->getErrores();
                 // print_r($errores);
@@ -55,32 +57,36 @@ include_once $GLOBALS['ROOT'] . 'Project/View/components/header.php';
                     $i++;
                 }
                 ?>
-            </p>
-        </div>
     </div>
-</div>
 <?php } else { ?>
-    <div class="container">
-    <div class="row">
-        <div class="card bg-primary shadow">
-            <h3>Ok</h3>
-            <p>
-                <?php 
-                $cantDatos = count($datosEnArray);
-                $i = 0;
-                while ($i<$cantDatos) {
-                    echo ($datosEnArray[$i] . "<br>");
-                    $i++;
-                }
-                ?>
-            </p>
+    <?php $esValido = $abmPersona->alta($datos);
+    if ($esValido){ ?>
+    <div class="card-body bg-success text-white text-center rounded-3">
+            <h3>Operacion exisota</h3>
+            <?php 
+                $message = 'La persona se registro correctamente en el sistema.';
+            ?>
+    <?php } else { ?>
+    <div class="card-body bg-danger text-white text-center rounded-3">
+            <h3>Operacion Fallida</h3>
+            <?php 
+                $message = 'Hubo un error al registrar la persona en el sistema, por favor corrobore los datos e intente nuevamente.';
+            ?>
+    <?php } ?>
+            <?php echo $message; ?>
+        </div>
+<?php } ?>
+            </div>
         </div>
     </div>
 </div>
-<?php } ?>
-    <div class="mt-5">
-        <a href="../admin/nuevaPersona.php" class="btn btn-outline-primary">Volver</a>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <a href="../admin/nuevaPersona.php" class="btn btn-outline-primary">Volver</a>
+        </div>
     </div>
+</div>
 <?php 
 include_once $GLOBALS['ROOT'] . 'Project/View/components/footer.php';
 ?>

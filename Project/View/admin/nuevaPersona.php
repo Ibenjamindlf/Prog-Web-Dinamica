@@ -1,7 +1,6 @@
 <?php 
 include_once $_SERVER['DOCUMENT_ROOT'] . '/PWD_ibenjamindlf/init.php';
 $titulo = 'Ingresar persona';
-$abmPersona = new AbmPersona();
 include_once $GLOBALS['ROOT'] . 'Project/View/components/header.php';
 ?>
 <!-- header propio -->

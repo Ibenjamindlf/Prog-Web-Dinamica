@@ -26,7 +26,8 @@
       <div class="col-md-6">
         <a class="btn btn-primary btn-lg w-100 shadow" href="../admin/listaPersonas.php">Ejercicio 5</a>
         <a class="btn btn-primary btn-lg w-100 shadow mt-3" href="../admin/nuevaPersona.php">Ejercicio 6</a>
-        <a class="btn btn-primary btn-lg w-100 shadow mt-3" href="#">Ejercicio 7(Prox..)</a>
+        <a class="btn btn-primary btn-lg w-100 shadow mt-3" href="../admin/nuevoAuto.php">Ejercicio 7</a>
+        <a class="btn btn-primary btn-lg w-100 shadow mt-3" href="../admin/CambioDuenio.php">Ejercicio 8(Prox..)</a>
       </div>
     </div>
   </main>

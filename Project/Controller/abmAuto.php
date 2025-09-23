@@ -60,14 +60,14 @@ class AbmAuto {
     // permite modificar un objeto
     public function modificacion($param){
     $resp = false;
-    $lista = $this->buscar(['Patente' => $param['Patente']]);
+    $lista = $this->buscar(['patente' => $param['patente']]);
     if ($lista != null){
         $objAuto = $lista[0]; // tomo el primer resultado
         $objAuto->setear(
-            $param['Patente'],
-            $param['Marca'],
-            $param['Modelo'],
-            $param['DniDuenio']
+            $param['patente'],
+            $param['marca'],
+            $param['modelo'],
+            $param['nroDniDuenio']
         );
         if ($objAuto->modificar()){
             $resp = true;

@@ -7,14 +7,14 @@ class AbmAuto {
     {
         $where = " true ";
         if ($param != null) {
-            if (isset($param['Patente']))
-                $where .= " and Patente = '".$param['Patente']."'";
-            if (isset($param['Marca']))
-                $where .= " and Marca = '".$param['Marca']."'";
-            if (isset($param['Modelo']))
-                $where .= " and Modelo = '".$param['Modelo']."'";
-            if (isset($param['DniDuenio']))
-                $where .= " and DniDuenio = '".$param['DniDuenio']."'";
+            if (isset($param['patente']))
+                $where .= " and patente = '".$param['patente']."'";
+            if (isset($param['marca']))
+                $where .= " and marca = '".$param['marca']."'";
+            if (isset($param['modelo']))
+                $where .= " and modelo = '".$param['modelo']."'";
+            if (isset($param['nroDniDuenio']))
+                $where .= " and nroDniDuenio = '".$param['nroDniDuenio']."'";
         }
         $arreglo = Auto::listar($where);
         // ✅ Si viene vacío, devuelvo null
@@ -26,16 +26,16 @@ class AbmAuto {
     // Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
     private function cargarObjeto ($param){
         $objAuto = null;
-        if (array_key_exists('Patente',$param) and
-        array_key_exists('Marca',$param) and
-        array_key_exists('Modelo',$param) and
-        array_key_exists('DniDuenio',$param)){
+        if (array_key_exists('patente',$param) and
+        array_key_exists('marca',$param) and
+        array_key_exists('modelo',$param) and
+        array_key_exists('nroDniDuenio',$param)){
             $objAuto = new Auto();
             $objAuto->setear(
-                $param['Patente'],
-                $param['Marca'],
-                $param['Modelo'],
-                $param['DniDuenio']
+                $param['patente'],
+                $param['marca'],
+                $param['modelo'],
+                $param['nroDniDuenio']
             );
         }
         return $objAuto;
@@ -90,7 +90,7 @@ class AbmAuto {
     // Permite agregar un objeto
     public function alta($param){
         $resp = false;
-        $busquedaAuto = ["Patente" => $param["Patente"]];
+        $busquedaAuto = ["patente" => $param["patente"]];
         $existeAuto = $this->buscar($busquedaAuto);
         if ($existeAuto == null){
             $objAuto = $this->cargarObjeto($param);

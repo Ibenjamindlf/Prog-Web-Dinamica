@@ -47,8 +47,9 @@ include_once $GLOBALS['ROOT'] . 'Project/View/components/header.php';
                                 <td class="text-center">
                                     <?php
                                     $dniPropietario = $unAuto->getNroDniPropietario();
-                                    $personas = $abmPersona->buscar(['NroDni' => $dniPropietario]);
+                                    $personas = $abmPersona->buscar(['nroDni' => $dniPropietario]);
                                     if (!empty($personas)) {
+                                        // print_r($personas);
                                         $persona = $personas[0]; // primer Persona
                                         echo $persona->getNombre(); // se imprime el nombre
                                         echo (" " . $persona->getApellido()); // Se imprime el apellido

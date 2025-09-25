@@ -1,4 +1,4 @@
-<?php 
+<?php  
 // ABM de Persona (Alta,Baja,Modificacion)
 class AbmPersona {
     // Permite buscar un objeto
@@ -60,16 +60,16 @@ class AbmPersona {
     // permite modificar un objeto
     public function modificacion($param){
         $resp = false;
-        $lista = $this->buscar(['NroDni' => $param['NroDni']]);
+        $lista = $this->buscar(['NroDni' => $param['nroDni']]);
         if($lista != null){
             $objPersona = $lista[0]; // tomo el primer resultado
             $objPersona ->  setear(
-                                $param['NroDni'], 
-                                $param['Apellido'], 
-                                $param['Nombre'], 
-                                $param['fechaNac'], 
-                                $param['Telefono'], 
-                                $param['Domicilio']);
+                                $param['nroDni'], 
+                                $param['apellido'], 
+                                $param['nombre'], 
+                                $param['fechaNacimiento'], 
+                                $param['telefono'], 
+                                $param['domicilio']);
             if ($objPersona->modificar()){
                 $resp = true;
             }

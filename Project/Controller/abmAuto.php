@@ -13,8 +13,8 @@ class AbmAuto {
                 $where .= " and marca = '".$param['marca']."'";
             if (isset($param['modelo']))
                 $where .= " and modelo = '".$param['modelo']."'";
-            if (isset($param['nroDniDuenio']))
-                $where .= " and nroDniDuenio = '".$param['nroDniDuenio']."'";
+            if (isset($param['DniDuenio']))
+                $where .= " and DniDuenio = '".$param['DniDuenio']."'";
         }
         $arreglo = Auto::listar($where);
         // ✅ Si viene vacío, devuelvo null

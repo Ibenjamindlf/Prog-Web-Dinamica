@@ -9,7 +9,7 @@ $datos = data_submitted();
 // Extraigo la patente (si existe en los datos)
 $patente = isset($datos['patente']) ? $datos['patente'] : null;
 // Busco autos según la patente
-$listadoDeAutos = $abmAuto->buscar(['Patente' => $patente]);
+$listadoDeAutos = $abmAuto->buscar(['patente' => $patente]);
 include_once $GLOBALS['ROOT'] . 'Project/View/components/header.php';
 ?>
 
@@ -49,7 +49,7 @@ include_once $GLOBALS['ROOT'] . 'Project/View/components/header.php';
                                 <td class="text-center">
                                     <?php
                                     $dniPropietario = $unAuto->getNroDniPropietario();
-                                    $personas = $abmPersona->buscar(['NroDni' => $dniPropietario]);
+                                    $personas = $abmPersona->buscar(['nroDni' => $dniPropietario]);
                                     if (!empty($personas)) {
                                         $persona = $personas[0]; // primer Persona
                                         echo $persona->getNombre(); // se imprime el nombre

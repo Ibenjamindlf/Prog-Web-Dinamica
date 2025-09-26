@@ -1,18 +1,9 @@
 <?php
-// include_once $_SERVER['DOCUMENT_ROOT'] . '/PWD_ibenjamindlf/configuracion.php';
-// include_once $_SERVER['DOCUMENT_ROOT'] . '/PWD_ibenjamindlf/project/model/auto.php';
-// include_once $_SERVER['DOCUMENT_ROOT'] . '/PWD_ibenjamindlf/project/controller/abmAuto.php';      
-// include_once $_SERVER['DOCUMENT_ROOT'] . '/PWD_ibenjamindlf/project/model/persona.php';
-// include_once $_SERVER['DOCUMENT_ROOT'] . '/PWD_ibenjamindlf/project/controller/abmPersona.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/PWD_ibenjamindlf/init.php';
-
-
 $titulo = 'Listado de Autos';
 $abmAuto = new AbmAuto();
 $listadoDeAutos = $abmAuto->buscar(null); // sin filtros, trae todos
 $abmPersona = new AbmPersona();
-// include_once $GLOBALS['ROOT'] . 'init.php';
-// include_once $_SERVER['DOCUMENT_ROOT'] . '/PWD_ibenjamindlf/Project/View/components/header.php'; 
 include_once $GLOBALS['ROOT'] . 'Project/View/components/header.php';
 ?>
 

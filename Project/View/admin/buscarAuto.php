@@ -6,8 +6,6 @@ $titulo = 'Busqueda de Autos';
 $abmAuto = new AbmAuto();
 $listadoDeAutos = $abmAuto->buscar(null); // sin filtros, trae todos
 $abmPersona = new AbmPersona();
-// include_once $GLOBALS['ROOT'] . 'init.php';
-// include_once $_SERVER['DOCUMENT_ROOT'] . '/PWD_ibenjamindlf/Project/View/components/header.php'; 
 include_once $GLOBALS['ROOT'] . 'Project/View/components/header.php';
 ?>
 <link rel="stylesheet" href="../assets/style/styleValidaciones.css">
@@ -32,5 +30,6 @@ include_once $GLOBALS['ROOT'] . 'Project/View/components/header.php';
     <!-- Validador para formularios -->
     <script src="../assets/function/validadorBuscarAuto.js"></script>
 </main>
-
-<!-- Seguir por aca, añadir validaciones -->
+<?php 
+include_once $GLOBALS['ROOT'] . 'Project/View/components/footer.php';
+?>

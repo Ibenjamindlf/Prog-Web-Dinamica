@@ -9,7 +9,9 @@ $datos = data_submitted();
 // Extraigo la patente (si existe en los datos)
 $nroDniPersona = $datos['nroDni'];
 // Busco autos según la patente
-$unaPersona = $abmPersona->buscar(['NroDni' => $nroDniPersona]);
+$unaPersona = $abmPersona->buscar(['nroDni' => $nroDniPersona]);
+print_r($unaPersona);
+// echo $nroDniPersona;
 include_once $GLOBALS['ROOT'] . 'Project/View/components/header.php';
 
 // ⬇️ Importante ⬇️
@@ -65,16 +67,10 @@ include_once $GLOBALS['ROOT'] . 'Project/View/components/header.php';
                                 <td class="text-center"><?php echo $unAuto->getModelo(); ?></td>
                                 <td class="text-center">
                                     <?php
-                                    $dniPropietario = $unAuto->getNroDniPropietario();
-                                    $personas = $abmPersona->buscar(['NroDni' => $dniPropietario]);
-                                    if (!empty($personas)) {
-                                        $persona = $personas[0]; // primer Persona
-                                        echo $persona->getNombre(); // se imprime el nombre
-                                        echo (" " . $persona->getApellido()); // Se imprime el apellido
-                                    } else {
-                                        echo "No tiene";
-                                    }
+                                    echo $unaPersona[0]->getNombre();
+                                    echo (" " . $unaPersona[0]->getApellido());
                                     ?>
+
                                 </td>
                             </tr>
                         <?php } 
